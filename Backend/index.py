@@ -1,11 +1,10 @@
-# index.py
 from dotenv import load_dotenv
 import os
 import shutil
-import uuid  # Add this import
+import uuid  
 from src.document_ingestion import load_pdf_file, filter_to_minimal_docs, text_split, download_hugging_face_embeddings
 from langchain_chroma import Chroma
-from langchain.schema import Document  # Import Document for type checking
+from langchain.schema import Document  
 
 load_dotenv()
 

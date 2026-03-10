@@ -20,8 +20,7 @@ os.environ["GROQ_API_KEY"] = GROQ_API_KEY
 embeddings = download_hugging_face_embeddings()
 
 # Define the persistent directory for ChromaDB
-persist_directory = "./chroma_db"  # Local folder to store the vector database
-
+persist_directory = "./chroma_db"  
 # Check if the ChromaDB exists and load it
 if os.path.exists(persist_directory):
     # Load existing ChromaDB

@@ -23,7 +23,7 @@ print(" Splitting into chunks...")
 text_chunks = text_split(filter_data)
 print(f" Created {len(text_chunks)} text chunks")
 
-# Ensure all chunks have page_content (basic check)
+# Ensure all chunks have page_content
 for i, chunk in enumerate(text_chunks):
     if not hasattr(chunk, 'page_content') or not chunk.page_content:
         print(f" Warning: Chunk {i} has no content, skipping")

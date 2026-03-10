@@ -19,21 +19,16 @@ os.environ["GROQ_API_KEY"] = GROQ_API_KEY
 
 embeddings = download_hugging_face_embeddings()
 
-# Define the persistent directory for ChromaDB
+
 persist_directory = "./chroma_db"  
-# Check if the ChromaDB exists and load it
 if os.path.exists(persist_directory):
-    # Load existing ChromaDB
     docsearch = Chroma(
         persist_directory=persist_directory,
         embedding_function=embeddings
     )
     print("Loaded existing ChromaDB from", persist_directory)
 else:
-    # If no existing database, you'll need to create one
-    # This part would typically be in a separate script for ingesting documents
     print("No existing ChromaDB found. Please run ingestion script first.")
-    # For now, create an empty one (you'll need to populate it)
     docsearch = Chroma(
         persist_directory=persist_directory,
         embedding_function=embeddings
@@ -41,7 +36,6 @@ else:
 
 retriever = docsearch.as_retriever(search_type="similarity", search_kwargs={"k": 3})
 
-# Using Groq as before
 chatModel = ChatGroq(
     model="llama-3.3-70b-versatile", 
     temperature=0.1,

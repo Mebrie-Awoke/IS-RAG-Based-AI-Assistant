@@ -12,17 +12,17 @@ load_dotenv()
 GROQ_API_KEY = os.environ.get('GROQ_API_KEY')
 os.environ["GROQ_API_KEY"] = GROQ_API_KEY
 
-print("📚 Loading PDF files...")
+print(" Loading PDF files...")
 extracted_data = load_pdf_file(data='Documents/')
-print(f"✅ Loaded {len(extracted_data)} pages")
+print(f" Loaded {len(extracted_data)} pages")
 
-print("🔍 Filtering documents...")
+print(" Filtering documents...")
 filter_data = filter_to_minimal_docs(extracted_data)
-print(f"✅ Filtered to {len(filter_data)} documents")
+print(f" Filtered to {len(filter_data)} documents")
 
-print("✂️ Splitting into chunks...")
+print(" Splitting into chunks...")
 text_chunks = text_split(filter_data)
-print(f"✅ Created {len(text_chunks)} text chunks")
+print(f" Created {len(text_chunks)} text chunks")
 
 # Ensure all chunks have page_content (basic check)
 for i, chunk in enumerate(text_chunks):

@@ -27,22 +27,22 @@ print(f" Created {len(text_chunks)} text chunks")
 # Ensure all chunks have page_content (basic check)
 for i, chunk in enumerate(text_chunks):
     if not hasattr(chunk, 'page_content') or not chunk.page_content:
-        print(f"⚠️ Warning: Chunk {i} has no content, skipping")
+        print(f" Warning: Chunk {i} has no content, skipping")
         text_chunks.pop(i)
 
-print("🎯 Loading embeddings...")
+print(" Loading embeddings...")
 embeddings = download_hugging_face_embeddings()
-print("✅ Embeddings loaded")
+print(" Embeddings loaded")
 
 # ChromaDB setup
 persist_directory = "./chroma_db"
 
 # Remove existing ChromaDB if you want to recreate
 if os.path.exists(persist_directory):
-    print(f"🗑️ Removing existing ChromaDB at {persist_directory}")
+    print(f"Removing existing ChromaDB at {persist_directory}")
     shutil.rmtree(persist_directory)
 
-print(f"💾 Creating ChromaDB at {persist_directory} with {len(text_chunks)} chunks...")
+print(f" Creating ChromaDB at {persist_directory} with {len(text_chunks)} chunks...")
 
 # Generate IDs manually to avoid the attribute error
 ids = [str(uuid.uuid4()) for _ in range(len(text_chunks))]
@@ -55,12 +55,12 @@ docsearch = Chroma.from_documents(
     ids=ids  # Explicitly provide IDs
 )
 
-print(f"✅ ChromaDB created successfully!")
-print(f"📁 Database saved to: {persist_directory}")
-print(f"📊 Total chunks indexed: {len(text_chunks)}")
+print(f" ChromaDB created successfully!")
+print(f" Database saved to: {persist_directory}")
+print(f" Total chunks indexed: {len(text_chunks)}")
 
 # Test the retrieval
-print("\n🔍 Testing retrieval...")
+print("\n Testing retrieval...")
 test_query = "medical information"
 results = docsearch.similarity_search(test_query, k=2)
 print(f"Test query: '{test_query}'")
@@ -72,4 +72,4 @@ for i, doc in enumerate(results):
     if hasattr(doc, 'metadata'):
         print(f"Metadata: {doc.metadata}")
 
-print("✅ Setup complete!")
+print(" Setup complete!")
